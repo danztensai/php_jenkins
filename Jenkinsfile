@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         PROJECT_ID = 'translate-cizen-1549780978207'
-        CLUSTER_NAME = 'my-first-cluster-1	'
+        CLUSTER_NAME = 'my-first-cluster-1'
         LOCATION = 'us-central1-c'
         CREDENTIALS_ID = 'gke'
     }
