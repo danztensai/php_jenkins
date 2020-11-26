@@ -12,23 +12,6 @@ pipeline {
                 checkout scm
             }
         }
-        stage("Build image") {
-            steps {
-                script {
-                    myapp = docker.build("danztensai123/php_simple_curd:${env.BUILD_ID}")
-                }
-            }
-        }
-        stage("Push image") {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                            myapp.push("latest")
-                            myapp.push("${env.BUILD_ID}")
-                    }
-                }
-            }
-        }        
         stage('Deploy to GKE') {
             steps{
                 sh "sed -i 's/php_simple_curd:latest/php_simple_curd:${env.BUILD_ID}/g' deployment.yaml"
