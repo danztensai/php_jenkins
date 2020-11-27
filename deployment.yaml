@@ -2,42 +2,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: php_simple_curd
+  name: php-simple-curd
   labels:
-    app: php_simple_curd
+    app: php-simple-curd
   annotations:
     monitoring: "true"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: php_simple_curd
+      app: php-simple-curd
   template:
     metadata:
       labels:
-        app: php_simple_curd
+        app: php-simple-curd
     spec:
       containers:
       - env:
         - name: whatever_env
           value : "whatever_value"
-        image: anztensai123/php_simple_curd
+        image: anztensai123/php-simple-curd
         imagePullPolicy: Always
-        name: php_simple_curd
+        name: php-simple-curd
         ports:
         - containerPort: 3306
 ---
 apiVersion: v1
 kind: Service
 metadata:
-name: php_simple_curd
+name: php-simple-curd
 labels:
-  app: php_simple_curd
+  app: php-simple-curd
 spec:
 ports:
   - port: 80
     targetPort: 80
 selector:
-  app: php_simple_curd
-  tier: php_simple_curd
+  app: php-simple-curd
+  tier: php-simple-curd
 type: LoadBalancer
