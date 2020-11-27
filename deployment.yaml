@@ -1,26 +1,31 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-name: php_simple_curd
-labels:
-  app: php_simple_curd
+  name: php_simple_curd
+  labels:
+    app: php_simple_curd
+  annotations:
+    monitoring: "true"
 spec:
-strategy:
-  type: Recreate
-template:
-  metadata:
-    labels:
+  replicas: 1
+  selector:
+    matchLabels:
       app: php_simple_curd
-      tier: php_simple_curd
-  spec:
-    containers:
-    - name: php_simple_curd
-      image: danztensai123/php_simple_curd:tagname
-      imagePullPolicy: Always
-      ports:
-      - containerPort: 80
+  template:
+    metadata:
+      labels:
+        app: php_simple_curd
+    spec:
+      containers:
+      - env:
+        - name: whatever_env
+          value : "whatever_value"
+        image: anztensai123/php_simple_curd
+        imagePullPolicy: Always
         name: php_simple_curd
-
+        ports:
+        - containerPort: 3306
 ---
 apiVersion: v1
 kind: Service
